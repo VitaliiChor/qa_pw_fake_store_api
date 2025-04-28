@@ -1,4 +1,4 @@
-# Stundents API testing
+# FakeStore API testing
 
 ## Table of contents
 
@@ -9,7 +9,7 @@
 
 ## Description
 
-
+In this task you need to create tests for the /product endpoint of the [FakeStoreAPI](https://fakestoreapi.com/docs#tag/Products). 
 
 
 ## Preparation
@@ -24,6 +24,16 @@
 
 ## Main Task
 
+1. Create new tests under the subfolders of `products` folder:  
+- `create/createProductPositive.spec.js`;
+- `read/getProductPositive.spec.js`; 
+- `update/updateProductPositive.spec.js`; 
+- `delete/deleteProductPositive.spec.js`; 
+3. Follow the test steps in comments of each spec file.
+3. Use `tests/users/**.spec.js` files as example.
+4. Create class `ProductsAPI.js` under the `src/api/endpoints` and add all the methods for work with the `/products` endpoint. Use `UsersAPI.js` as exapmle. 
+5. Create helper fixtures in file `tests/_fixtures/fixturesProductsApi.ts` file. Do not forget to merge new fixture file to the ``tests/_fixtures/fixtures.ts`.
+6. Run all your tests and make sure they pass. 
 
 ## Task Reporting
 
