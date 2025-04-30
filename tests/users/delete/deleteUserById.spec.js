@@ -10,7 +10,7 @@ test.beforeEach(async ({ newUserData, usersApi }) => {
   userId = await usersApi.parseIdFromBody(response);
 });
 
-test('Delete user', async ({ usersApi }) => {
+test('Delete user by Id', async ({ usersApi }) => {
   const response = await usersApi.deleteUser(userId);
 
   await usersApi.assertSuccessResponseCode(response);
