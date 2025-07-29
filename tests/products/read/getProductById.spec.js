@@ -8,8 +8,8 @@ Test:
 3. Assert that the Response Body contains field 'id'
 */
 
-test('Read product information', async ({ request }) => {
-  const response = await request.get('/products/1');
+test('Read product information', async ({ productsApi }) => {
+  const response = await productsApi.getProduct('1');
   expect(response.status()).toBe(SUCCESS_CODE);
 
   const body = await response.json();

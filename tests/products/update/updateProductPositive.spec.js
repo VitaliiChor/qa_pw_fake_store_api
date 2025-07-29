@@ -19,7 +19,7 @@ Test:
 
 let createdProductId;
 
-test.beforeEach(async ({ request }) => {
+test.beforeEach(async ({ productsApi }) => {
   const productData = {
     title: 'string',
     price: 0.1,
@@ -27,7 +27,7 @@ test.beforeEach(async ({ request }) => {
     category: 'string',
     image: 'http://example.com',
   };
-  const response = await request.post('/products', { data: productData });
+  const response = await productsApi.createProduct({ data: productData });
   expect(response.status()).toBe(SUCCESS_CODE);
   const body = await response.json();
   expect(body.id).toBeDefined();
@@ -35,7 +35,7 @@ test.beforeEach(async ({ request }) => {
   createdProductId = body.id;
 });
 
-test('Update product with new data', async ({ request }) => {
+test('Update product with new data', async ({ productsApi }) => {
   const newProductData = {
     title: 'Update string',
     price: 2,
@@ -43,13 +43,16 @@ test('Update product with new data', async ({ request }) => {
     category: 'Updated string',
     image: 'http://example.com/updated',
   };
-  const response = await request.put(`/products/${createdProductId}`, {
-    data: newProductData,
-  });
+  const updatedResponse = await productsApi.updateProduct(
+    `${createdProductId}`,
+    {
+      data: newProductData,
+    },
+  );
 
-  expect(response.status()).toBe(SUCCESS_CODE);
+  expect(updatedResponse.status()).toBe(SUCCESS_CODE);
 
-  const body = await response.json();
+  const body = await updatedResponse.json();
 
   expect(body.title).toBe(newProductData.title);
   expect(body.price).toBe(newProductData.price);

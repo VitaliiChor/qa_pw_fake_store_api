@@ -1,6 +1,5 @@
 import { test, expect } from '../../_fixtures/fixtures';
 import { SUCCESS_CODE } from '../../../src/api/constants/responceCodes';
-import { status } from 'wd/lib/commands';
 
 /*
 Preconditions:
@@ -15,7 +14,7 @@ Test:
 
 let createdProductId;
 
-test.beforeEach(async ({ request }) => {
+test.beforeEach(async ({ productsApi }) => {
   const productData = {
     title: 'string',
     price: 0.1,
@@ -23,7 +22,7 @@ test.beforeEach(async ({ request }) => {
     category: 'string',
     image: 'http://example.com',
   };
-  const response = await request.post('/products', { data: productData });
+  const response = await productsApi.createProduct({ data: productData });
   expect(response.status()).toBe(SUCCESS_CODE);
   const body = await response.json();
   expect(body.id).toBeDefined();
@@ -31,7 +30,7 @@ test.beforeEach(async ({ request }) => {
   createdProductId = body.id;
 });
 
-test('Delete product', async ({ request }) => {
-  const response = await request.delete(`/products/${createdProductId}`);
+test('Delete product', async ({ productsApi }) => {
+  const response = await productsApi.deleteProduct(`${createdProductId}`);
   expect(response.status()).toBe(SUCCESS_CODE);
 });
